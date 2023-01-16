@@ -4,19 +4,23 @@ import { CommonModule } from '@angular/common';
 import { JobRoutingModule } from './job-routing.module';
 import { SharedModule } from '../shared';
 import { JobsComponent } from './pages';
-import { JobPostComponent, JobDescriptionComponent } from './components';
+import { JobPostComponent, JobDescriptionComponent, TextViewerComponent } from './components';
+import { QuillModule } from 'ngx-quill';
+
 
 
 @NgModule({
   declarations: [
     JobsComponent,
     JobPostComponent,
-    JobDescriptionComponent
+    JobDescriptionComponent,
+    TextViewerComponent
   ],
   imports: [
     CommonModule,
     JobRoutingModule,
-    SharedModule
+    SharedModule,
+    QuillModule.forRoot()
   ]
 })
 export class JobModule { }
