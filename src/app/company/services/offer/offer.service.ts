@@ -10,7 +10,8 @@ type Offer = {
   salary: string,
   salaryType: string,
   country: string,
-  state: string
+  state: string,
+  email: string
 }
 
 @Injectable({
@@ -23,7 +24,7 @@ export class OfferService {
   constructor(private http: HttpClient) { }
 
   add(payload: Offer): Observable<any> {
-    return this.http.post(`${this.baseUrl}/jobOffers`, payload)
+    return this.http.post(`${this.baseUrl}/jobOffer/add`, payload)
   }
 
 }

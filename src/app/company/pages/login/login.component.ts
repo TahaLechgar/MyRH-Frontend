@@ -3,6 +3,8 @@ import { OauthService } from 'src/app/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SecurityService} from "../../../core/services/security/security.service";
 import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private oauthService: OauthService,
               private securityService: SecurityService,
-              private router: Router) { }
+              private router: Router,
+              private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -42,6 +45,7 @@ export class LoginComponent implements OnInit {
       this.securityService.companyLogin(this.email?.value, this.password?.value).subscribe({
         next: (data) => {
           this.oauthService.updateToken(data.token)
+          localStorage.setItem('email', this.email?.value)
           this.router.navigate(['/'])
         },
         error: err => {

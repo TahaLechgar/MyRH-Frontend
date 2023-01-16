@@ -3,6 +3,7 @@ import {OfferService, TextEditorService} from "../../services";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CountryService} from "../../../core";
 import {Router} from "@angular/router";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-add-job',
@@ -54,6 +55,7 @@ export class AddJobComponent implements OnInit {
   addOffer() {
 
     this.displayFormValues()
+    const email = localStorage.getItem('email') ?? ''
 
     const payload = {
       profile: this.addJobForm.get('profile')?.value ?? '',
@@ -62,7 +64,8 @@ export class AddJobComponent implements OnInit {
       salary: this.addJobForm.get('salary')?.value ?? '',
       salaryType: this.addJobForm.get('salaryType')?.value ?? '',
       country: this.addJobForm.get('country')?.value ?? '',
-      state: 'OPEN'
+      state: 'OPEN',
+      email
     }
 
     this.offerService.add(payload).subscribe({

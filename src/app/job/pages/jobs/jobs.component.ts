@@ -1,6 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import {JobService} from "../../services";
+
+type Job = {
+  country:string,
+  description:string,
+  jobType:string,
+  profile:string,
+  salary:string,
+  salaryType:string,
+  state:string
+}
 
 @Component({
   selector: 'app-jobs',
@@ -10,11 +21,20 @@ import { environment } from 'src/environments/environment';
 export class JobsComponent implements OnInit {
 
   name: string = ''
+  jobs: Job[] = []
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private jobService: JobService) { }
 
   ngOnInit(): void {
-    this.http.get(environment.baseUrl + '/v1/home').subscribe((data: any) => this.name = data.name)
+    this.jobService.getAll().subscribe({
+      next: (data) => {
+        console.log(data)
+        data._embedded.jobOffers.map((job: Job) => {
+          this.jobs.push(job)
+        })
+      }
+    })
   }
 
 }
