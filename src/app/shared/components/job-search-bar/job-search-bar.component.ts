@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryService } from 'src/app/core';
 import {SearchService} from "../../services";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'job-search-bar',
@@ -14,7 +15,8 @@ export class JobSearchBarComponent implements OnInit {
   searchText: string = ''
 
   constructor(private countryService: CountryService,
-              private searchService: SearchService) { }
+              private searchService: SearchService,
+              private router: Router) { }
 
   ngOnInit(): void {
 
@@ -40,6 +42,7 @@ export class JobSearchBarComponent implements OnInit {
 
   search() {
     this.searchService.searchJobOffers(this.searchText, this.selectedCountry)
+    this.router.navigate(['/jobs'])
   }
 
 }

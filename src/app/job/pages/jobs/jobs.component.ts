@@ -37,9 +37,7 @@ export class JobsComponent implements OnInit {
   jobs: Job[] = []
   selectedJob: Job = this.jobs[0]
 
-  constructor(private http: HttpClient,
-              private jobService: JobService,
-              public searchService: SearchService) { }
+  constructor(public searchService: SearchService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
