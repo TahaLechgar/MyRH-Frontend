@@ -34,6 +34,7 @@ export class JobsComponent implements OnInit {
 
   name: string = ''
   jobs: Job[] = []
+  selectedJob: Job = this.jobs[0]
 
   constructor(private http: HttpClient,
               private jobService: JobService) { }
@@ -45,8 +46,13 @@ export class JobsComponent implements OnInit {
         data._embedded.jobOffers.map((job: Job) => {
           this.jobs.push(job)
         })
+        this.selectedJob = this.jobs[0]
       }
     })
+  }
+
+  selectJob(job: Job) {
+    this.selectedJob = job
   }
 
 }

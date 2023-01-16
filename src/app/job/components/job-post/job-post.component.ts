@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 type Job = {
   country:string,
@@ -31,10 +31,17 @@ type Company = {
 export class JobPostComponent implements OnInit {
 
   @Input() job: Job|undefined
+  @Output() selectJob: EventEmitter<any> = new EventEmitter()
+
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  sendSelectedJob() {
+    this.selectJob.emit(this.job)
+  }
+
 
 }

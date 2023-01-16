@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 
 type Job = {
@@ -31,10 +31,11 @@ type Company = {
 export class JobDescriptionComponent implements OnInit {
 
   @Input() job: Job|undefined
-
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
+ 
 }
