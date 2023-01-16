@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryService } from 'src/app/core';
+import {SearchService} from "../../services";
 
 @Component({
   selector: 'job-search-bar',
@@ -12,7 +13,8 @@ export class JobSearchBarComponent implements OnInit {
   selectedCountry: string = 'Afghanistan'
   searchText: string = ''
 
-  constructor(private countryService: CountryService) { }
+  constructor(private countryService: CountryService,
+              private searchService: SearchService) { }
 
   ngOnInit(): void {
 
@@ -34,6 +36,10 @@ export class JobSearchBarComponent implements OnInit {
   displayCountry(value: string) {
     console.log('previous : ',this.selectedCountry);
     console.log('current : ', value);
+  }
+
+  search() {
+    this.searchService.searchJobOffers(this.searchText, this.selectedCountry)
   }
 
 }

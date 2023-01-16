@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import {JobService} from "../../services";
+import {SearchService} from "../../../shared";
 
 type Job = {
   country:string,
@@ -37,18 +38,13 @@ export class JobsComponent implements OnInit {
   selectedJob: Job = this.jobs[0]
 
   constructor(private http: HttpClient,
-              private jobService: JobService) { }
+              private jobService: JobService,
+              public searchService: SearchService) { }
 
   ngOnInit(): void {
-    this.jobService.getAll().subscribe({
-      next: (data) => {
-        console.log(data)
-        data._embedded.jobOffers.map((job: Job) => {
-          this.jobs.push(job)
-        })
-        this.selectedJob = this.jobs[0]
-      }
-    })
+    setTimeout(() => {
+      this.selectedJob = this.searchService.filteredJobs[0]
+    }, 1000)
   }
 
   selectJob(job: Job) {
