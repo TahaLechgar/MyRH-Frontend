@@ -32,6 +32,7 @@ type Company = {
 export class SearchService {
 
   filteredJobs: Job[] = []
+  selectedJob: Job|undefined = undefined
 
   constructor(private http: HttpClient) {
     this.getAll()
@@ -43,6 +44,7 @@ export class SearchService {
     if(profile !== ''){
       params += `&profile=${profile}`
     }
+    this.selectedJob = undefined
     this.http.get(url+params).subscribe({
       next: (data: any) => {
         console.log(this.filteredJobs)
@@ -58,7 +60,8 @@ export class SearchService {
   }
 
   getAll(): void {
-     this.http.get(`${environment.baseUrl}/jobOffers?projection=offerDetail`).subscribe({
+    this.selectedJob = undefined
+    this.http.get(`${environment.baseUrl}/jobOffers?projection=offerDetail`).subscribe({
       next: (data: any) => {
         this.filteredJobs = []
         data._embedded.jobOffers.map((job: Job) => {

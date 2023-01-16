@@ -13,9 +13,12 @@
 
 
 <section class="w-2/6 ml-12 mt-52">
+  <div *ngIf="searchService.filteredJobs.length != 0">
     <job-post (selectJob)="selectJob($event)" *ngFor="let job of searchService.filteredJobs" [job]="job"></job-post>
+  </div>
+  <p *ngIf="searchService.filteredJobs.length == 0" class="text-lg my-auto">No posts available</p>
 </section>
 
 <section class="w-3/5 h-2/3 bg-white fixed top-52 rounded-md" style="right: 1%;">
-    <job-description [job]="selectedJob" ></job-description>
+    <job-description [job]="searchService.selectedJob" ></job-description>
 </section>

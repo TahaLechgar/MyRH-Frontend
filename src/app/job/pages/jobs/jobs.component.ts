@@ -40,13 +40,9 @@ export class JobsComponent implements OnInit {
   constructor(public searchService: SearchService) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.selectedJob = this.searchService.filteredJobs[0]
-    }, 1000)
   }
 
   selectJob(job: Job) {
-    this.selectedJob = job
+    this.searchService.selectedJob = job
   }
-
 }
